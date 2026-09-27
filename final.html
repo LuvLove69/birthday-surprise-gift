@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="my">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Surprise For You 💖</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+            background-color: #000;
+        }
+
+        /* Background Video (Full Screen & Loop) */
+        #bg-video {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: 1;
+            transform: translate(-50%, -50%);
+            object-fit: cover;
+            filter: brightness(0.75);
+        }
+
+        /* Overlay Layer */
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Transparent Quest Container */
+        .quest-card {
+            background: transparent;
+            padding: 20px;
+            text-align: center;
+            max-width: 350px;
+            width: 90%;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        /* Steps Display Logic */
+        .step {
+            display: none;
+        }
+        .step.active {
+            display: block;
+        }
+
+        /* Top Sticker Icon Styles */
+        .cute-sticker {
+            width: 120px;
+            height: auto;
+            margin-bottom: 15px;
+            filter: drop-shadow(0 4px 10px rgba(0,0,0,0.5));
+        }
+
+        .quest-card h2 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 34px;
+            color: #ffffff;
+            text-shadow: 0 0 10px rgba(255, 117, 140, 0.9), 0 2px 8px rgba(0, 0, 0, 0.9);
+            margin-bottom: 12px;
+        }
+
+        .quest-card p {
+            font-size: 15px;
+            color: #ffffff;
+            text-shadow: 0 2px 6px rgba(0, 0, 0, 0.9);
+            margin-bottom: 22px;
+            line-height: 1.6;
+        }
+
+        /* Button Options */
+        .btn-group {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            align-items: center;
+        }
+
+        /* ဘောင်မပါ၊ အရောင်မပါသည့် Sticker Button သီးသန့် စတိုင် */
+        .raw-btn {
+            background: transparent !important;
+            border: none !important;
+            outline: none !important;
+            box-shadow: none !important;
+            padding: 0 !important;
+            cursor: pointer;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            transition: transform 0.2s ease;
+        }
+
+        /* Sticker Image ကြီး/သေး ညှိရန် */
+        .btn-sticker {
+            width: 80px;  /* လိုချင်သလို ကြီး/သေး ညှိနိုင်သည် */
+            height: auto;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.4));
+        }
+
+        .retry-sticker {
+            width: 140px; /* Try Again Sticker အရွယ်အစား */
+            height: auto;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.4));
+        }
+
+        .letter-sticker {
+            width: 75px;  /* ပန်းအောက်က 📩 / Letter Sticker အရွယ်အစား */
+            height: auto;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.4));
+        }
+
+        .raw-btn:active {
+            transform: scale(0.88);
+        }
+
+        /* Flower Style (Step 3) */
+        .flower-container {
+            position: relative;
+            margin: 15px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .flower-img {
+            width: 150px;
+            height: auto;
+            filter: drop-shadow(0 6px 12px rgba(0,0,0,0.5));
+            margin-bottom: 15px;
+        }
+
+        .bounce-anim {
+            animation: bounce 1.5s infinite;
+        }
+
+        /* Letter Box Style (Step 4) */
+        .letter-text-box {
+            text-align: left;
+            max-height: 300px;
+            overflow-y: auto;
+            padding: 18px;
+            font-size: 14px;
+            color: #ffffff;
+            line-height: 1.8;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(5px);
+            border-radius: 18px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+    </style>
+</head>
+<body>
+
+    <video id="bg-video" autoplay loop muted playsinline>
+        <source src="final_bg.mp4" type="video/mp4">
+    </video>
+
+    <div class="overlay">
+        
+        <!-- STEP 1: A CX KA LYY QUESTION -->
+        <div id="step-1" class="quest-card step active">
+            <img src="cat1.gif" alt="Cute Cat" class="cute-sticker">
+            <h2>a cx ka lyy!</h2>
+            <p>Would you like to see your gift?</p>
+            <div class="btn-group">
+                <!-- ဘောင်မပါ စတေကာ သီးသန့် No Button -->
+                <button class="raw-btn" onclick="showStep('step-2')">
+                    <img src="no_sticker.png" alt="No" class="btn-sticker">
+                </button>
+                <!-- ဘောင်မပါ စတေကာ သီးသန့် Yes Button -->
+                <button class="raw-btn" onclick="showStep('step-3')">
+                    <img src="yes_sticker.png" alt="Yes" class="btn-sticker">
+                </button>
+            </div>
+        </div>
+
+        <!-- STEP 2: AW PLEASE -->
+        <div id="step-2" class="quest-card step">
+            <img src="cat2.gif" alt="Sad Cat" class="cute-sticker">
+            <h2>Aw Please?</h2>
+            <p>I prepared this gift special for you!</p>
+            <!-- ဘောင်မပါ စာမပါ စတေကာ သီးသန့် Try Again Button -->
+            <button class="raw-btn" onclick="showStep('step-1')">
+                <img src="retry_sticker.png" alt="Try Again" class="retry-sticker">
+            </button>
+        </div>
+
+        <!-- STEP 3: FLOWERS -->
+        <div id="step-3" class="quest-card step">
+            <h2>Flowers For You</h2>
+            <p>Click the letter for a surprise!</p>
+            
+            <div class="flower-container">
+                <img src="flowers.png" alt="Flowers" class="flower-img">
+                
+                <!-- ပန်းအောက်က ဘောင်မပါ စတေကာ သီးသန့် Letter Button -->
+                <button class="raw-btn bounce-anim" onclick="showStep('step-4')">
+                    <img src="letter_sticker.png" alt="Letter" class="letter-sticker">
+                </button>
+            </div>
+        </div>
+
+        <!-- STEP 4: FINAL LETTER -->
+        <div id="step-4" class="quest-card step">
+            <h2>Happy Birthday My Babee Pookie!</h2>
+            <div class="letter-text-box">
+                <p>
+                    ဘေဘီလေးရဲ့ 21နှစ်ပြည့်မွေးနေ့ကနေ နောင်နှစ်ပေါင်းများစွာအထိ ပျော်ရွှင်ချမ်းမြေ့စွာနဲ့ ကိုကို့ဘေးမှာ အမြဲတမ်း ပြုံးပြုံးရွှင်ရွှင်လေး ရှိနေပေးပါနော် 💖
+                    <br><br>
+                    မွေးနေ့မှာ လိုချင်တဲ့ ဆုတောင်းတွေအကုန် ပြည့်ဝပါစေအချစ်ကလေး
+                   <br>
+            I love you so much! 🫶
+                </p>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        function showStep(stepId) {
+            const steps = document.querySelectorAll('.step');
+            steps.forEach(step => step.classList.remove('active'));
+            
+            const targetStep = document.getElementById(stepId);
+            if (targetStep) {
+                targetStep.classList.add('active');
+            }
+        }
+    </script>
+
+</body>
+</html>

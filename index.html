@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="my">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <audio id="bg-music" loop src="bdsong.m4a"></audio>
+
+    <canvas id="matrix"></canvas>
+
+    <div class="container">
+        <!-- Step 1: Countdown -->
+        <div id="text-screen" class="screen active">
+            <h1 id="display-text">3</h1>
+        </div>
+
+        <!-- Step 2: Sticker Button -->
+        <div id="heart-screen" class="screen">
+            <img src="giphy.gif" class="sticker-btn" onclick="goToMainPage()" alt="Sticker Button">
+        </div>
+
+        <!-- Step 3: Galaxy Book & Heart Gallery Page (အသည်းပုံ ပေါ်မည့် Page) -->
+        <div id="main-screen" class="screen">
+            <div id="wish-box" class="wish-box">
+                <p id="wish-text">✨ Tap the book to flip ✨</p>
+            </div>
+
+            <!-- Custom Pure CSS 3D Book -->
+            <div class="book-container" id="book-container" onclick="flipNextPage()">
+                <div class="book" id="my-book">
+                    <!-- Page 0 -->
+                    <div class="book-page" id="page-0">
+                        <div class="page-front">
+                            <img src="cover.jpg" alt="Cover">
+                        </div>
+                        <div class="page-back">
+                            <img src="mygirl2.jpg" alt="Photo 2">
+                        </div>
+                    </div>
+
+                    <!-- Page 1 -->
+                    <div class="book-page" id="page-1">
+                        <div class="page-front">
+                            <img src="mygirl3.jpg" alt="Photo 3">
+                        </div>
+                        <div class="page-back">
+                            <img src="mygirl4.jpg" alt="Photo 4">
+                        </div>
+                    </div>
+
+                    <!-- Page 2 -->
+                    <div class="book-page" id="page-2">
+                        <div class="page-front">
+                            <img src="mygirl.jpg" alt="Photo 5">
+                        </div>
+                        <div class="page-back">
+                            <img src="back.jpg" alt="Back Cover">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Heart Gallery Container (ပုံများဖြင့် အသည်းပုံ ပေါ်မည့်နေရာ) -->
+            <div class="heart-gallery" id="heart-gallery"></div>
+
+            <!-- 1. အသည်းပုံ Page ၏ အောက်နားတွင် ပေါ်မည့် စာသား -->
+            <div class="wish-instruction">
+                <p>Listen till the end and make a wish ✨</p>
+            </div>
+
+            <!-- 2. အသည်းပုံ အလယ်တွင် ပေါ်မည့် Sticker (စက္ကန့် ၉၀ ပြည့်မှ ပေါ်မည်) -->
+            <div id="secret-sticker-btn" class="sticker-container" style="display: none;" onclick="goToNextPage()">
+                <img src="giphy1.gif" alt="Make a Wish Sticker">
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Logic Script -->
+    <script src="script.js"></script>
+
+    <!-- 85-second Timer Script -->
+    <script>
+        // စက္ကန့် ၈၅ (85000ms) ပြည့်လျှင် Sticker ကို ဖော်ပေးမည်
+        setTimeout(function() {
+            const stickerBtn = document.getElementById("secret-sticker-btn");
+            if (stickerBtn) {
+                stickerBtn.style.display = "block";
+            }
+        }, 85000); 
+
+        // Sticker ကို နှိပ်လျှင် နောက် Page (final.html) သို့ သွားမည်
+        function goToNextPage() {
+            window.location.href = "final.html"; 
+        }
+    </script>
+</body>
+</html>
