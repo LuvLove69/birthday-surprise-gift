@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday</title>
+    <title>Happy Birthday Pookie</title>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -33,7 +33,7 @@
             <div class="book-container" id="book-container" onclick="flipNextPage()">
                 <div class="book" id="my-book">
                     <!-- Page 0 -->
-                    <div class="book-page" id="page-0">
+                    <div class="book-page" id="page-0" style="z-index: 3;">
                         <div class="page-front">
                             <img src="cover.jpg" alt="Cover">
                         </div>
@@ -43,7 +43,7 @@
                     </div>
 
                     <!-- Page 1 -->
-                    <div class="book-page" id="page-1">
+                    <div class="book-page" id="page-1" style="z-index: 2;">
                         <div class="page-front">
                             <img src="mygirl3.jpg" alt="Photo 3">
                         </div>
@@ -53,112 +53,33 @@
                     </div>
 
                     <!-- Page 2 -->
-                    <div class="book-page" id="page-2">
+                    <div class="book-page" id="page-2" style="z-index: 1;">
                         <div class="page-front">
-                            <img src="mygirl.jpg" alt="Photo 5">
+                            <img src="mygirl5.jpg" alt="Photo 5">
                         </div>
                         <div class="page-back">
-                            <img src="back.jpg" alt="Back Cover">
+                            <img src="mygirl.jpg" alt="Back Cover">
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Heart Gallery Container -->
+            <!-- Heart Gallery Container (အသည်းပုံ ပေါ်မည့်နေရာ) -->
             <div class="heart-gallery" id="heart-gallery"></div>
 
-            <!-- 1. အသည်းပုံ Page ၏ အောက်နားတွင် ပေါ်မည့် စာသား -->
+            <!-- အောက်နားတွင် ပေါ်မည့် စာသား -->
             <div class="wish-instruction">
                 <p>Listen till the end and make a wish ✨</p>
             </div>
 
-            <!-- 2. စက္ကန့် ၈၅ ပြည့်မှ ပေါ်မည့် Sticker -->
+            <!-- စက္ကန့် ၈၅ ပြည့်မှ ပေါ်မည့် Secret Sticker -->
             <div id="secret-sticker-btn" class="sticker-container" style="display: none;" onclick="goToNextPage()">
                 <img src="giphy1.gif" alt="Make a Wish Sticker">
             </div>
         </div>
     </div>
 
-    <!-- Embedded Complete Logic Script -->
-    <script>
-        // 1. Matrix Background Effect
-        const canvas = document.getElementById('matrix');
-        if (canvas) {
-            const ctx = canvas.getContext('2d');
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-            const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-            const fontSize = 10;
-            const columns = canvas.width / fontSize;
-            const drops = Array(Math.floor(columns)).fill(1);
-
-            function drawMatrix() {
-                ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
-                ctx.fillRect(0, 0, canvas.width, canvas.height);
-                ctx.fillStyle = '#0F0';
-                ctx.font = fontSize + 'px monospace';
-                for (let i = 0; i < drops.length; i++) {
-                    const text = letters.charAt(Math.floor(Math.random() * letters.length));
-                    ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-                    if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
-                    drops[i]++;
-                }
-            }
-            setInterval(drawMatrix, 33);
-        }
-
-        // 2. Countdown Logic (3 -> 2 -> 1 -> Step 2)
-        let count = 3;
-        const displayElement = document.getElementById("display-text");
-        
-        const timer = setInterval(() => {
-            count--;
-            if (count > 0) {
-                if (displayElement) displayElement.textContent = count;
-            } else {
-                clearInterval(timer);
-                // Countdown ပြီးရင် Step 1 ကို ဖျောက်ပြီး Step 2 (Heart Screen) ကို ပြမည်
-                const textScreen = document.getElementById("text-screen");
-                const heartScreen = document.getElementById("heart-screen");
-                if (textScreen) textScreen.classList.remove("active");
-                if (heartScreen) heartScreen.classList.add("active");
-                
-                // သီချင်း ဖွင့်မည်
-                const music = document.getElementById("bg-music");
-                if (music) { music.play().catch(() => {}); }
-            }
-        }, 1000);
-
-        // 3. Sticker ကို နှိပ်ရင် Main Page သို့ သွားမည်
-        function goToMainPage() {
-            const heartScreen = document.getElementById("heart-screen");
-            const mainScreen = document.getElementById("main-screen");
-            if (heartScreen) heartScreen.classList.remove("active");
-            if (mainScreen) mainScreen.classList.add("active");
-        }
-
-        // 4. Book Flip Logic
-        let currentPage = 0;
-        function flipNextPage() {
-            const pages = document.querySelectorAll('.book-page');
-            if (currentPage < pages.length) {
-                pages[currentPage].style.transform = 'rotateY(-180deg)';
-                currentPage++;
-            }
-        }
-
-        // 5. စက္ကန့် ၈၅ ပြည့်လျှင် Sticker ကို ဖော်ပေးမည်
-        setTimeout(function() {
-            const stickerBtn = document.getElementById("secret-sticker-btn");
-            if (stickerBtn) {
-                stickerBtn.style.display = "block";
-            }
-        }, 85000); 
-
-        // 6. Sticker ကို နှိပ်လျှင် နောက် Page (final.html) သို့ သွားမည်
-        function goToNextPage() {
-            window.location.href = "final.html"; 
-        }
-    </script>
+    <!-- Script File လှမ်းခေါ်ခြင်း -->
+    <script src="script.js"></script>
 </body>
 </html>
