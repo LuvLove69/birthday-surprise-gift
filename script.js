@@ -10,11 +10,10 @@ if (canvas) {
     const drops = Array(Math.floor(columns)).fill(1);
 
     function drawMatrix() {
-        // Canvas အနက်ရောင် ပြန်ဖုံးပေးခြင်း
         ctx.fillStyle = 'rgba(0, 0, 0, 0.08)';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-        ctx.fillStyle = '#00FF66'; // တောက်ပသော စိမ်းလန်းသော အရောင်
+        ctx.fillStyle = '#00FF66';
         ctx.font = fontSize + 'px monospace';
 
         for (let i = 0; i < drops.length; i++) {
@@ -57,13 +56,31 @@ function goToMainPage() {
     playAudio();
 }
 
-// 4. Book Flip Logic
+// 4. Book Flip Logic & Dynamic Text Change (စာအုပ်လှန်တိုင်း စာသားပြောင်းရန်)
 let currentPage = 0;
+const wishes = [
+    "✨ Tap the book to flip ✨",
+    "💖 You are my absolute favorite person! 💖",
+    "🌸 Thanks for staying by my side always 🌸",
+    "✨ Make a wish and listen till the end ✨"
+];
+
 function flipNextPage() {
     const pages = document.querySelectorAll('.book-page');
+    const wishTextElement = document.getElementById('wish-text');
+
     if (currentPage < pages.length) {
         pages[currentPage].style.transform = 'rotateY(-180deg)';
         currentPage++;
+
+        // အပေါ်က စာသားကို လှလှပပ ပြောင်းလဲပေးခြင်း
+        if (wishTextElement && wishes[currentPage]) {
+            wishTextElement.style.opacity = 0;
+            setTimeout(() => {
+                wishTextElement.textContent = wishes[currentPage];
+                wishTextElement.style.opacity = 1;
+            }, 300);
+        }
     }
 }
 
